@@ -1,22 +1,29 @@
 #include <iostream>
 #include <fstream>
+#include <climits>
+
 #define nmax 500000
 using namespace std;
 
-long p[nmax];
+long pw[nmax];
+int fm[nmax];
 
 void quickSort(int start, int end){
   if(end <= start) return;
   int i = start - 1;
 
   for(int j = start; j < end; j++)
-    if(p[j] < p[end])
-      swap(p[++i], p[j]);
-  swap(p[++i], p[end]);
+    if(pw[j] < pw[end]){
+      swap(pw[++i], pw[j]);
+      swap(fm[i], fm[j]);
+    }
+  swap(pw[++i], pw[end]);
+  swap(fm[i], fm[end]);
 
   quickSort(start, i - 1);
   quickSort(i + 1, end);
 }
+
 
 
 int main(){
@@ -26,22 +33,19 @@ int main(){
 
   int n;
   fin >> n;
-  long sumF = 0;
 
   for(int i = 0; i < n; i++){
-    int fn;
-    fin >> p[i] >> fn;
-    sumF += fn;
+    fin >> pw[i] >> fm[i];
   }
   quickSort(0, n - 1);
 
-  long minDelta = LNG_MAX;
+  long maxNum = LONG_MIN;
   for(int i = 0; i < n - 1; i++){
-    int delta = p[i + 1] - p[i];
-    if(delta < minDelta){
-
-    }
+    long num = fm[i] + fm[i + 1] - max(pw[i], pw[i + 1]) + min(pw[i], pw[i + 1]);
+    maxNum = max(num, maxNum);
   }
+
+  cout << maxNum;
 
 
   fin.close();
