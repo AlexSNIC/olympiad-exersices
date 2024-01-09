@@ -10,9 +10,11 @@ int k, trS, aS;
 long maxSatisf = LONG_MIN;
 
 void find(int x, long satisf){
+  satisf += collection[x];
+
   if(x == k){
-    satisf += collection[x];
     if(satisf > maxSatisf) maxSatisf = satisf;
+    return;
   }
 
 }
