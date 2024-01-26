@@ -3,7 +3,9 @@
     "iostream": "cpp",
     "vector": "cpp",
     "iosfwd": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "deque": "cpp",
+    "ostream": "cpp"
   },
   "cSpell.words": [
     "fout"
