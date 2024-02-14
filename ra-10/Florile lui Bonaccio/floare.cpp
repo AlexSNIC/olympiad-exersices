@@ -26,13 +26,13 @@ int main(){
   fib.at(0) = 0;
   fib.at(1) = 1;
   findFib(fib, 39);
-  reverse(fib.begin(), fib.end());
 
   vector<int> answer;
-  for(int value : fib){
-    if(n - value >= 0){
-      n-=value;
-      answer.push_back(value);
+  for(int i = fib.size() - 1; i >= 0; i--){
+    if(n - fib[i] >= 0){
+      n -= fib[i];
+      answer.push_back(fib[i]);
+      i--;
     }
   }
 
