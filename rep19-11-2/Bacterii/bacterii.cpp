@@ -24,8 +24,8 @@ int main(){
 
   int n, lifespan, time;
   fin >> n >> lifespan >> time;
-  int alive = n * bacterii(false, lifespan, time, lifespan);
-  cout << alive;
+  long long alive = n * bacterii(false, lifespan, time, lifespan);
+  fout << alive;
 
 
   fin.close();
