@@ -46,14 +46,12 @@ int main(){
   ofstream fout("numere.out");
 
   string nr; fin >> nr;
-
   int reduced {};
-
   for(char c : nr){
     reduced += charToInt(c);
   }
+  
   findNr(nr, 0, reduced, true);
-
   nr[nrIndex] = char(nrValue + '0');
   fout << nr;
 
