@@ -16,7 +16,7 @@ int stringToNr(char nr){
 int main(){
   ifstream fin("turnalb.in");
   ofstream fout("turnalb.out");
-
+  const int tableSize = 9;
   vector<vector<int>> board(10, vector<int>(10)); 
   
   string piece; fin >> piece;
@@ -33,15 +33,35 @@ int main(){
   int depth = 1;
   bool goalReached = false;
   while(!queue.empty() && !goalReached){
-    
-
-    int i = 0;
+    poz = queue.back();
+    queue.pop_back();
+    int i = 1;
     while(true){
       if(poz == goal){
         goalReached = true;
+        break;
       }
+      if(poz.first + i <= tableSize && poz.second <= tableSize)
+        if(board.at(poz.first + i).at(poz.second) == 0){
+          board.at(poz.first + i).at(poz.second) = depth;
+          queue.push_front(make_pair(poz.first + i, poz.second))
+        }
+      if(poz.first - i <= tableSize && poz.second <= tableSize)
+        if(board.at(poz.first - i).at(poz.second) == 0){
+          board.at(poz.first - i).at(poz.second) = depth;
+          queue.push_front(make_pair(poz.first - i, poz.second))
+        }
+      if(poz.first - i <= tableSize && poz.second <= tableSize)
+      if(board.at(poz.first).at(poz.second + i) == 0){
+        board.at(poz.first).at(poz.second + i) = depth;
+        queue.push_front(make_pair(poz.first, poz.second + i))
+      }
+      if(board.at(poz.first).at(poz.second - i) == 0){
+        board.at(poz.first).at(poz.second - i) = depth;
+        queue.push_front(make_pair(poz.first, poz.second - i))
+      }
+      i++;
     }
-    i = 0;
   }
 
   fin.close();

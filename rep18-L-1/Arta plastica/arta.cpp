@@ -36,7 +36,7 @@ int main(){
   int width, height;
   fin >> width >> height;
   int n; fin >> n;
-  vector<vector<bool>> mat(height, vector<bool>(width, 1));
+  vector<vector<bool>> mat(height + 1, vector<bool>(width + 1, 1));
   int xStart, yStart, xEnd, yEnd;
   while(fin >> xStart >> yStart >> xEnd >> yEnd){
     addSquare(mat, xStart, yStart, xEnd, yEnd);
