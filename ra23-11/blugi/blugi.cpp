@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+const int nmax = 1000;
 
 int main(){
 
@@ -10,7 +11,7 @@ int main(){
   unsigned n; fin >> n;
   n++;
 
-  unsigned colection[n];
+  unsigned colection[nmax];
   for(int i = 0; i < n; i++){
     colection[i] = 0;
   }
