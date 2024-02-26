@@ -1,23 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-using namespace std;
 
-int minT = INT_MAX;
-void find(int count, int a, int an, int b, int bn, int c, int cn, int minCount){
-    
-}
+using namespace std;
 
 int main(){
 
   ifstream fin("lego.in");
   ofstream fout("lego.out");
 
-  int x, xn, y, yn, z, zn, k;
-  fin >> x >> y >> z >> xn >> yn >> zn >> k;
-  
-  
-  cout << minT;
+  int a1, a2, a3, b1, b2, b3;
+  long k;
+  fin >> a1 >> a2 >> a3 >> b1 >> b2 >> b3 >> k;
 
   fin.close();
   fout.close();

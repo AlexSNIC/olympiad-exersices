@@ -1,22 +1,14 @@
 #include <iostream>
 #include <fstream>
-#include <climits>
-#define nmax 200000
+#include <vector>
+#include <limits>
 
 using namespace std;
 
-int collection[nmax];
-int k, trS, aS;
-long maxSatisf = LONG_MIN;
-
-void find(int x, long satisf){
-  satisf += collection[x];
-
-  if(x == k){
-    if(satisf > maxSatisf) maxSatisf = satisf;
-    return;
-  }
-
+int satisfaction(vector<int>& loc, int k, int ut, int ua){
+  if(k >= loc.size()) return 0;
+  int sum = 0;
+  
 }
 
 int main(){
@@ -24,12 +16,15 @@ int main(){
   ifstream fin("file.in");
   ofstream fout("file.out");
   
-  fin >> k >> trS >> aS;
-  for(int i = 0; i < k; i++){
-    fin >> collection[i];
+  int n, ut, ua;  
+  fin >> n >> ut >> ua;
+  int temp;
+  vector<int> loc;
+  while(fin >> temp){
+    loc.push_back(temp);
   }
 
-  find(1, 1);
+  
 
   fin.close();
   fout.close();
