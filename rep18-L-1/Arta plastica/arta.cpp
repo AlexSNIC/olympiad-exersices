@@ -41,8 +41,7 @@ int main(){
   while(fin >> xStart >> yStart >> xEnd >> yEnd){
     addSquare(mat, xStart, yStart, xEnd, yEnd);
   }
-  print(mat);
-  cout << sum(mat);
+  fout << sum(mat);
 
 
 
