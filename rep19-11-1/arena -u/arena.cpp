@@ -9,7 +9,7 @@ int main(){
   ifstream fin("arena.in");
   ofstream fout("arena.out");
   
-
+  
 
   fin.close();
   fout.close();
