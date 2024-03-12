@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+#include <deque>
 using namespace std;
 
 struct Node{
@@ -11,7 +11,10 @@ struct Node{
   int rightNode = -1;
 };
 
-int findLeftPath(vector<Node>& nodes, int currentLevel, int targetLevel, bool backtrack = false);
+void pushNodes(deque<int>& queue, Node node){
+  if(node.leftNode != -1) queue.push_front(node.leftNode);
+  if(node.rightNode != -1) queue.push_front(node.rightNode);
+}
 
 int main(){
 
@@ -40,22 +43,27 @@ int main(){
     }
   }
 
+  bool code = 0;
+  vector<deque<int>> queue(2);
+  int currentLevel = 0;
+  queue.at(0).push_back(rootNode);
+  while(!(queue.at(0).empty() && queue.at(1).empty())){
+    if(queue.at(code).empty()){
+      currentLevel++;
+      code = !code;
+      continue;
+    }
+    if(currentLevel == level){
+      fout << queue.at(code).back() << " " << queue.at(code).front() << endl;
+      break;
+    }
+    int currentNode = queue.at(code).back();
+    queue.at(code).pop_back();
+    pushNodes(queue.at(!code), nodes.at(currentNode));
+  }
+
   fin.close();
   fout.close();
 
   return 0;
-}
-
-int findLeftPath(vector<Node>& nodes, int currentNode, int currentLevel, int targetLevel, bool backtrack = false){
-  if(currentLevel == targetLevel) return currentNode;
-  int availableBranch = 0;
-  if(nodes.at(currentNode).leftNode != -1) availableBranch = 1;
-  else if(nodes.at(currentNode).rightNode != -1) availableBranch = -1;
-  if(availableBranch == 0) return -1;
-
-
-  int nextNode;
-  if(availableBranch == -1) nextNode = nodes.at(currentNode).leftNode;
-  int result = findLeftPath(nodes, nextNode, currentLevel + 1, targetLevel);
-
 }
