@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <utility>
+#include <iomanip>
 
 using namespace std;
 
@@ -37,19 +38,46 @@ pair<int, int> pop_smallest(vector<pair<int, int>>& stack, vector<vector<int>>& 
     }
     i++;
   }
-  cout << minIndex << endl;
   pair<int, int> minPair = stack.at(minIndex);
   stack.erase(stack.begin() + minIndex);
   return minPair;
 }
 
-void dijkstra(vector<vector<int>>& mat, vector<pair<int, int>>& stack){
+pair<int, int> pop_biggest(vector<pair<int, int>>& stack, vector<vector<int>>& sums){
+  size_t maxSize = sums.size();
+  int maxWeight = INT_MIN;
+  int maxIndex;
+  int i = 0;
+  for(pair<int, int> poz : stack){
+    if(!isViable(poz, maxSize)){
+      stack.erase(stack.begin() + i);
+      continue;
+    }
+    int weight = sums.at(poz.first).at(poz.second);
+    if(weight > maxWeight){
+      maxWeight = weight;
+      maxIndex = i;
+    }
+    i++;
+  }
+  pair<int, int> maxPair = stack.at(maxIndex);
+  stack.erase(stack.begin() + maxIndex);
+  return maxPair;
+}
+void print(vector<vector<int>> mat){
+  for(auto vec : mat){
+    for(int val : vec){
+      cout << setw(4) << val << " ";
+    }
+    cout << endl;
+  }
+}
+
+int dijkstra(vector<vector<int>>& mat, bool findSmallest){
   size_t maxSize = mat.size();
   vector<vector<int>> sums(maxSize, vector<int>(maxSize, INT_MAX));
-
+  vector<pair<int, int>> stack;
   sums.at(1).at(1) = mat.at(1).at(1);
-  sums.at(2).at(1) = mat.at(1).at(1) + mat.at(2).at(1);
-  sums.at(2).at(2) = mat.at(1).at(1) + mat.at(2).at(2);
   stack.push_back(make_pair(1, 1));
   pair<int, int> poz;
 
@@ -58,27 +86,25 @@ void dijkstra(vector<vector<int>>& mat, vector<pair<int, int>>& stack){
       cout << "Error: empty stack" << endl;
       break;
     }
-    poz = pop_smallest(stack, sums);
+    if(findSmallest) poz = pop_smallest(stack, sums);
+    else poz = pop_biggest(stack, sums);
     if(poz.first == maxSize - 1)break;
 
-    if(isViable(poz.first + 1, poz.second - 1, maxSize) && sums.at(poz.first + 1).at(poz.second - 1) != INT_MAX){
+    if(isViable(poz.first + 1, poz.second - 1, maxSize) && sums.at(poz.first + 1).at(poz.second - 1) == INT_MAX){
       sums.at(poz.first + 1).at(poz.second - 1) = sums.at(poz.first).at(poz.second) + mat.at(poz.first + 1).at(poz.second - 1);
       stack.push_back(make_pair(poz.first + 1, poz.second - 1));
-      cout << "1";
     }
-    if(isViable(poz.first + 1, poz.second, maxSize) && sums.at(poz.first + 1).at(poz.second) != INT_MAX){
+    if(isViable(poz.first + 1, poz.second, maxSize) && sums.at(poz.first + 1).at(poz.second) == INT_MAX){
       sums.at(poz.first + 1).at(poz.second) = sums.at(poz.first).at(poz.second) + mat.at(poz.first + 1).at(poz.second);
       stack.push_back(make_pair(poz.first + 1, poz.second));
-      cout << "2";
     }
-    if(isViable(poz.first + 1, poz.second + 1, maxSize) && sums.at(poz.first + 1).at(poz.second + 1) != INT_MAX){
+    if(isViable(poz.first + 1, poz.second + 1, maxSize) && sums.at(poz.first + 1).at(poz.second + 1) == INT_MAX){
       sums.at(poz.first + 1).at(poz.second + 1) = sums.at(poz.first).at(poz.second) + mat.at(poz.first + 1).at(poz.second + 1);
       stack.push_back(make_pair(poz.first + 1, poz.second + 1));
-      cout << "3";
     }
   }
 
-  cout << sums.at(poz.first).at(poz.second);
+  return sums.at(poz.first).at(poz.second);
 }
 
 int main(){
@@ -93,10 +119,9 @@ int main(){
       mat.at(i).at(j) = temp;
     }
   }
-  
-  vector<pair<int, int>> stack;
 
-  dijkstra(mat, stack);
+  cout << dijkstra(mat, true) << ' ' << dijkstra(mat, false);
+
 
 
   fin.close();
