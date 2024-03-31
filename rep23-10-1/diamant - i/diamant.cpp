@@ -95,7 +95,7 @@ int main(){
     }
   }
   
-  cout << endl << sum;
+  fout << endl << sum;
   fin.close();
   fout.close();
 

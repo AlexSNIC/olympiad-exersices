@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
-#define nmax 10000
 using namespace std;
 
+const int nmax  = 100001;
 int temps[nmax];
 int n;
 int moves;
@@ -43,7 +43,6 @@ void findMoves(int poz){
   }
   int interval = findInterval(poz);
   changeInterval(interval, poz, temps[poz] > 0);
-  printTemps();
   moves++;
   findMoves(poz);
 }
