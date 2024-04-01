@@ -1,6 +1,8 @@
-5 3
-G G G H G
-G M G G G
-G G G G G
-G G T G G
-G G T G D
+7 3
+T T T T T T T
+T G G G G G T
+T G G G G G T
+M G G G G G D
+T G G G G G T
+T G G G G G T
+T H H H H H T
