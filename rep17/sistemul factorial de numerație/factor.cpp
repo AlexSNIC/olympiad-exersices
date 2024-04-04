@@ -51,9 +51,9 @@ int main(){
   reverse(nFactorial.begin(), nFactorial.end());
 
   for(int val : nFactorial) fout << val << " ";
-  
+
   fin.close();
   fout.close();
-
+  
   return 0;
 }
