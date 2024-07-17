@@ -2,8 +2,7 @@
 #include <unordered_set>
 #include <string>
 class Solution {
-  private:
-    
+  private: 
   public:
     int lengthOfLongestSubstring(std::string s){
       int maxLength = 0;
