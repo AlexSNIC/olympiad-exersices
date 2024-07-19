@@ -6,33 +6,39 @@ class Solution {
     
   public:
     int lengthOfLongestSubstring(std::string s){
-      int maxLength = 0;
+      auto startIt = s.begin();
+      auto endIt = s.begin();
+      std::unordered_set<char> set;
+
       int length = 0;
-      std::unordered_set<char> letters;
-      
-      auto from = s.begin();
-      auto to = s.begin();
-      letters.insert(s.at(0));
+      int maxLength = 0; 
 
-      while (to != s.end()) {
-        if (letters.find(*to) == letters.end()) {
-          letters.insert(*to);
-          to++;
-          int length = to - from;
-          if (length > maxLength) maxLength = length;
-        } else {
-          letters.erase(*from);
-          from++;
+      while(true){
+        const char currentValue = *startIt;
+
+        if(startIt == endIt || set.find(currentValue) == set.end()){
+          set.insert(currentValue);
+          startIt++;
+          length++;
+          maxLength = std::max(maxLength, length);
         }
+        else{
+          do{
+            set.erase(*endIt);
+            endIt++;
+            length--;
+          }
+          while(*endIt != currentValue);
+        }
+        if(startIt == s.end()) break;
       }
-
-
       return maxLength;
     }
 } solution;
 
 int main(){
-  std::cout << solution.lengthOfLongestSubstring("qwertyuiopqasdfghjklqzcvbnm");
+  std::cout << solution.lengthOfLongestSubstring("qwertyuiopasdfgthjklzxcvtbnm");
+  
 }
 
 
