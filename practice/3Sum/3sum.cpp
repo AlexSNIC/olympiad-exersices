@@ -4,18 +4,16 @@
 #include <unordered_set>
 #include <tuple>
 
-typedef std::tuple<int, int, int> int_tpl;
-
 class Solution {
 public:
     int sortedTuple(int a, int b, int c){
       int arr[3] = {a, b, c};
       std::sort(arr, arr + 3);
-      return std::make_tuple(arr[0], arr[1], arr[2]);
+      return std::string() + arr[0] + " " + arr[1] + " " + arr[2];
     }
 
     std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
-      std::unordered_set<int_tpl> set;
+      std::unordered_set<std::string> set;
       std::sort(nums.begin(), nums.end());
 
       auto target = nums.begin();
@@ -30,8 +28,10 @@ public:
 
       while(target != nums.end() - 4){
         if(*start + *end == *target){
-          set
+          set.insert(sortedTuple(start, end, target));
         }
+        else if(end >= start) next();
+        
       }
     }
     void log(std::vector<std::vector<int>> sol){
