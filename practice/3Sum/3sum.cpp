@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_set>
-#include <tuple>
 
 class Solution {
 public:
@@ -31,7 +30,7 @@ public:
           set.insert(sortedTuple(start, end, target));
         }
         else if(end >= start) next();
-        
+
       }
     }
     void log(std::vector<std::vector<int>> sol){
