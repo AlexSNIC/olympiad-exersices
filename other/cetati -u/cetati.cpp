@@ -5,7 +5,6 @@ using namespace std;
 struct Cetate{
   int x, y;
 }
-
 int main(){
 
   ifstream fin("cetati.in");
