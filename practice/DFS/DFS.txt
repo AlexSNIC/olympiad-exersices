@@ -1,0 +1,7 @@
+Given: 
+1. Matrix size (y x)
+2. Starting coordinate (y x)
+3. Ending coordinate (y x)
+4. Matrix
+
+Is it possible to traverse from point a to point b?
